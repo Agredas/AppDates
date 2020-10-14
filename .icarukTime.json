@@ -1,11 +1,13 @@
 {
-    "idleHeartbeats": 0,
-    "navigatingHeartbeats": 6,
-    "totalCodingHeartbeats": 61,
+    "idleHeartbeats": 163,
+    "navigatingHeartbeats": 46,
+    "totalCodingHeartbeats": 206,
     "languageHeartbeats": {
-        "json": 61
+        "json": 61,
+        "javascript": 145
     },
     "fileHeartbeats": {
-        "package.json": 61
+        "package.json": 61,
+        "config/dbconnect.js": 145
     }
 }
