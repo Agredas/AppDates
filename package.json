@@ -1,0 +1,24 @@
+{
+  "name": "appdates",
+  "version": "1.0.0",
+  "description": "Appointment management system for a Dental Clinic.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Agredas/AppDates.git"
+  },
+  "author": "Andrea Ágredas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Agredas/AppDates/issues"
+  },
+  "homepage": "https://github.com/Agredas/AppDates#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.10.9"
+  }
+}

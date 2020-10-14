@@ -1,0 +1,11 @@
+{
+    "idleHeartbeats": 0,
+    "navigatingHeartbeats": 6,
+    "totalCodingHeartbeats": 61,
+    "languageHeartbeats": {
+        "json": 61
+    },
+    "fileHeartbeats": {
+        "package.json": 61
+    }
+}
