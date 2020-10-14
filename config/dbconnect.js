@@ -1,11 +1,16 @@
 const dbconnect = () => {
-  Mongoose.connect('mongodb+srv://Agredas:ZBhG52@cluster0.kuwyb.mongodb.net/dentalClinic?retryWrites=true&w=majority',{ //Link Atlas MongoDB
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true,
-  useFindAndModify: false
+   
+  const mongoose = require('mongoose');
+  const url = 'mongodb+srv://Agredas:ZBhG52!@cluster0.kuwyb.mongodb.net/dentalClinic?retryWrites=true&w=majority';
+  
+  mongoose.connect(url,{
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
 }).then(() => console.log('Sucessfully conected to MongoDB.'))
-.catch(console.error)
+  .catch(error => 
+    console.log('There was an error trying to connect to the DB.' + error));
 } 
 
-module.exports = mongoose;
+module.exports = dbconnect;
