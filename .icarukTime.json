@@ -1,22 +1,23 @@
 {
-    "idleHeartbeats": 3851,
-    "navigatingHeartbeats": 1015,
-    "totalCodingHeartbeats": 3019,
+    "idleHeartbeats": 6162,
+    "navigatingHeartbeats": 1528,
+    "totalCodingHeartbeats": 4190,
     "languageHeartbeats": {
         "json": 61,
-        "javascript": 2823,
+        "javascript": 3994,
         "plaintext": 135
     },
     "fileHeartbeats": {
         "package.json": 61,
         "config/dbconnect.js": 539,
-        "app.js": 727,
+        "app.js": 853,
         "c:\\Users\\Usuario\\Desktop\\backMongooseJunior-master\\models\\User.js": 101,
         "models/Client.js": 170,
         "c:\\Users\\Usuario\\Desktop\\AppDates\\models\\Client.js.git": 45,
-        "controllers/clientController.js": 777,
+        "controllers/clientController.js": 1668,
         "c:\\Users\\Usuario\\Desktop\\AppDates\\app.js.git": 45,
-        "middleware/auth.js": 509,
-        "c:\\Users\\Usuario\\Desktop\\AppDates\\middleware\\auth.js.git": 45
+        "middleware/auth.js": 563,
+        "c:\\Users\\Usuario\\Desktop\\AppDates\\middleware\\auth.js.git": 45,
+        "asfadsf.js": 100
     }
 }
