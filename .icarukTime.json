@@ -1,0 +1,19 @@
+{
+    "idleHeartbeats": 2141,
+    "navigatingHeartbeats": 483,
+    "totalCodingHeartbeats": 2177,
+    "languageHeartbeats": {
+        "json": 61,
+        "javascript": 2071,
+        "plaintext": 45
+    },
+    "fileHeartbeats": {
+        "package.json": 61,
+        "config/dbconnect.js": 539,
+        "app.js": 626,
+        "c:\\Users\\Usuario\\Desktop\\backMongooseJunior-master\\models\\User.js": 101,
+        "models/Client.js": 170,
+        "c:\\Users\\Usuario\\Desktop\\AppDates\\models\\Client.js.git": 45,
+        "controllers/clientController.js": 635
+    }
+}
