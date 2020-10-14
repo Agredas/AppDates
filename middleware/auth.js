@@ -23,3 +23,5 @@ const auth = async(req,res,next) => {
     res.status(401).send({error, message: 'You are not authorized.'})
   }
 }
+
+module.exports = auth;

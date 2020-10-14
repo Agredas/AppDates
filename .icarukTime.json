@@ -1,11 +1,11 @@
 {
-    "idleHeartbeats": 3550,
-    "navigatingHeartbeats": 1003,
-    "totalCodingHeartbeats": 2926,
+    "idleHeartbeats": 3851,
+    "navigatingHeartbeats": 1015,
+    "totalCodingHeartbeats": 3019,
     "languageHeartbeats": {
         "json": 61,
-        "javascript": 2775,
-        "plaintext": 90
+        "javascript": 2823,
+        "plaintext": 135
     },
     "fileHeartbeats": {
         "package.json": 61,
@@ -16,6 +16,7 @@
         "c:\\Users\\Usuario\\Desktop\\AppDates\\models\\Client.js.git": 45,
         "controllers/clientController.js": 777,
         "c:\\Users\\Usuario\\Desktop\\AppDates\\app.js.git": 45,
-        "middleware/auth.js": 461
+        "middleware/auth.js": 509,
+        "c:\\Users\\Usuario\\Desktop\\AppDates\\middleware\\auth.js.git": 45
     }
 }
