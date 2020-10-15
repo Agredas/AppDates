@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const mongoose = require('mongoose');
+const { response } = require('express');
 
 /* const register = (req,res) => {
   ClientModel.create(req.body)
@@ -94,6 +95,14 @@ const showClients = (req,res) => {
   .catch(error => console.log('There was an error trying to show all clients.' + error))
 }
 
+const showClientId = (req,res) => {
+  ClientModel.findOne({id:req.params.clientId})
+  .then(clients => {
+    respons.send(clients)
+  })
+  .catch(error => console.log('There was a problem trying to show clients by Id.' + error))
+}
+
 const modify = async (req,res) => {
   ClientModel.findByIdAndUpdate(req.body.id, {
     name: req.body.name,
@@ -110,7 +119,7 @@ const modify = async (req,res) => {
         res.send({message: 'There was an error trying to modify the changes.'})
       }
     }
-  }).catch (error => console.log('There was an error' + error))
+  }).catch (error => console.log('There was an error.' + error))
 }
 
 const deleteClient = async (req,res) => {
@@ -134,6 +143,7 @@ module.exports = {
   login,
   logout,
   showClients,
+  showClientId,
   modify,
   deleteClient
 }

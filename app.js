@@ -11,6 +11,7 @@ const {register} =  require('./controllers/clientController');
 const {login} = require('./controllers/clientController');
 const {logout} = require('./controllers/clientController');
 const {showClients} =  require('./controllers/clientController');
+const {showClientId} =  require('./controllers/clientController');
 const {modify} =  require('./controllers/clientController');
 const {deleteClient} =  require('./controllers/clientController');
 
@@ -24,6 +25,7 @@ app.post('/client/register', register);
 app.post('/client/login', login);
 app.post('/client/logout', logout);
 app.get('/client/showAll', showClients);
+app.get('/client/showId', showClientId);
 app.put('/client/modify', modify);
 app.delete('/client/delete/:id', deleteClient);
 
