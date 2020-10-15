@@ -19,8 +19,8 @@ const {deleteClient} =  require('./controllers/clientController');
 const dbconnect = require('./config/dbconnect');
 dbconnect();
 
-//ACTIONS
-//Client actions
+// Endpoints 
+//Client endpoints 
 app.post('/client/register', register);
 app.post('/client/login', login);
 app.post('/client/logout', logout);

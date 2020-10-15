@@ -73,17 +73,19 @@ const login = async(req, res) => {
 
 const logout = async(req,res) => {
   try {
-    const token = req.headers.authorization;
+    const token = req.headers.authorization.split(' ')[1];
+    console.log(token)
     const outClient = await ClientModel.findOne({token:token});
-
+    console.log(outClient)
     outClient.token = null;
     outClient.save();
     res.send('See you soon.')
+ 
   } catch (error) {
     console.log(error)
     res.status(500).send({message: 'There was a problem trying to log out.'})
   }
-}
+} 
 
 const showClients = (req,res) => {
   ClientModel.find({})
