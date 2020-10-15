@@ -79,7 +79,7 @@ const logout = async(req,res) => {
     console.log(outClient)
     outClient.token = null;
     outClient.save();
-    res.send('See you soon.')
+    res.send('We hope to see you soon.')
  
   } catch (error) {
     console.log(error)
