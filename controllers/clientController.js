@@ -1,5 +1,5 @@
 const ClientModel = require('../models/Client');
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const mongoose = require('mongoose');
@@ -21,22 +21,30 @@ const register = async (req,res) => {
       return;
     }
     try{
-      req.body.password = await bcrypt.hash(req.bodypassword, 9)
+      req.body.password = await bcrypt.hash(req.body.password, 9)
       const client = await new ClientModel({
         name: req.body.name,
-        usernames: req.body.username,
+        surnames: req.body.surnames,
         phone: req.body.phone,
         email: req.body.email,
         password: req.body.password
       }).save();
       res.send({
-      message: 'Account succesfully created.'
+      message: 'Account succesfully created.',
+      name: client.name,
+      surnames: client.surnames,
       })
-    }catch (error) {
-    console.error(error);
-    res.status(500).send({message: 'There was a problem trying to register the client.' })
-  }
-}
+    } catch (error) { 
+      if (error.code === 11000) {
+        res.status(409); 
+        res.send({
+          error: "Email is already being used."
+        });
+      }else {
+          res.send(error);
+      }
+    };
+};
 
 const login = async(req, res) => {
   try {
@@ -54,7 +62,7 @@ const login = async(req, res) => {
       if(isMatch){
         res.send({
           name: client.name,
-          username: client.username,
+          surnames: client.surnames,
           email: client.email
         })
       }else{
@@ -106,7 +114,7 @@ const showClientId = (req,res) => {
 const modify = async (req,res) => {
   ClientModel.findByIdAndUpdate(req.body.id, {
     name: req.body.name,
-    usernames: req.body.username,
+    surnames: req.body.surnames,
     phone: req.body.phone,
     email: req.body.email,
     password: req.body.password
