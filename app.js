@@ -24,8 +24,8 @@ dbconnect();
 app.post('/client/register', register);
 app.post('/client/login', login);
 app.post('/client/logout', logout);
-app.get('/client/showAll', showClients);
-app.get('/client/showId', showClientId);
+app.get('/client/showClients', showClients);
+app.get('/client/showId/:id', showClientId);
 app.put('/client/modify', modify);
 app.delete('/client/delete/:id', deleteClient);
 

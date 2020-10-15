@@ -5,12 +5,6 @@ const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const { response } = require('express');
 
-/* const register = (req,res) => {
-  ClientModel.create(req.body)
-  .then(client => res.send(client))
-  .catch(error => console.log('There was a problem trying to register the client.' + error))
-} */
-
 const register = async (req,res) => {
     let regExEmail = /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/;
 
@@ -47,45 +41,41 @@ const register = async (req,res) => {
 };
 
 const login = async(req, res) => {
-  try {
-    const client = await Client.findOne({
-      where:{
-        email: req.body.email
-      }
-    })
-    if(!client) {
-      return res.status(400).send({
+
+  let clientFound = await ClientModel.findOne({
+    email: req.body.email
+    });
+    if(!clientFound) {
+      res.send({
         message: 'Wrong credentials or client does not exist.'
       })
     }else{
-      const isMatch = await bcrypt.compare(req.body.password, client.password);
+      const isMatch = await bcrypt.compare(req.body.password, clientFound.password);
       if(isMatch){
+
+        const token = jwt.sign({id: clientFound.id }, 'elvistecmec', { expiresIn: '30d' })
+        clientFound.token = token;
+        await clientFound.save()
+
         res.send({
-          name: client.name,
-          surnames: client.surnames,
-          email: client.email
+          name: clientFound.name,
+          surnames: clientFound.surnames,
+          email: clientFound.email,
+          token: clientFound.token
         })
       }else{
         return res.status(400).send({
           message: 'Wrong credentials.'
       })
     }
-
-    const token = jwt.sign({id: client.id }, 'elvistecmec', { expiresIn: '30d' })
-    console.log(token)
-    client.token = token;
-    await client.save()
-    res.send(client);
     }
-  }catch (error){
-    console.error(error);
-    res.status(500).send({message: 'There was a problem trying to log in.'})
   }
-}
 
 const logout = async(req,res) => {
   try {
+    const token = req.headers.authorization;
     const outClient = await ClientModel.findOne({token:token});
+
     outClient.token = null;
     outClient.save();
     res.send('See you soon.')
@@ -96,7 +86,7 @@ const logout = async(req,res) => {
 }
 
 const showClients = (req,res) => {
-  new ClientModel.find({})
+  ClientModel.find({})
   .then(clients =>{
     res.send(clients)
   })
@@ -106,7 +96,7 @@ const showClients = (req,res) => {
 const showClientId = (req,res) => {
   ClientModel.findOne({id:req.params.clientId})
   .then(clients => {
-    respons.send(clients)
+    res.send(clients)
   })
   .catch(error => console.log('There was a problem trying to show clients by Id.' + error))
 }
@@ -131,19 +121,20 @@ const modify = async (req,res) => {
 }
 
 const deleteClient = async (req,res) => {
-  ClientModel.findByIdAndDelete(req.body.id)
-    .then((deletedClient) => {
-      if(deletedClient){
-        res.send({message: `Client ${deletedClient.req.body.name} ${deletedClient.req.body.surnames} with id: ${deletedClient.req.body.id} was successfully deleted.`});
-      } else{
-        res.status(500);
-        res.send({
-          message: `Client with that id not found.`
-        })
-      };
-  }).catch( (error) => {
+  let id = req.params.id;
+  ClientModel.findByIdAndDelete(id)
+  .then((deletedClient) => {
+    if(deletedClient){
+      res.send({message: `Client succesfully deleted. Name: ${deletedClient.name} Email: ${deletedClient.email}`});
+    }else{
+      res.status(500);
+      res.send({
+        message: 'Client with that Id not found.'
+      })
+    };
+  }).catch((error) => {
     console.log('There was a problem trying to delete the client.' + error)
-  });
+  })
 }
 
 module.exports = {
