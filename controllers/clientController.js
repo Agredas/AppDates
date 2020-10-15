@@ -94,6 +94,25 @@ const showClients = (req,res) => {
   .catch(error => console.log('There was an error trying to show all clients.' + error))
 }
 
+const modify = async (req,res) => {
+  ClientModel.findByIdAndUpdate(req.body.id, {
+    name: req.body.name,
+    usernames: req.body.username,
+    phone: req.body.phone,
+    email: req.body.email,
+    password: req.body.password
+  }, {new: true, useFindAndModify: false})
+  .then( (client) => {
+    if(client){
+      if(client){
+      res.send(client);
+      }else{
+        res.send({message: 'There was an error trying to modify the changes.'})
+      }
+    }
+  }).catch (error => console.log('There was an error' + error))
+}
+
 const deleteClient = async (req,res) => {
   ClientModel.findByIdAndDelete(req.body.id)
     .then((deletedClient) => {
