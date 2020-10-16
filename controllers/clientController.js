@@ -6,38 +6,37 @@ const mongoose = require('mongoose');
 const { response } = require('express');
 
 const register = async (req,res) => {
-    let regExEmail = /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/;
-
-    if(!regExEmail.test(req.body.email)){
+  let regExEmail = /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9{2}|[0-9]{1,2})\]?$)/;
+  if(!regExEmail.test(req.body.email)){
+    res.send({
+      message: 'The email is not valid.'
+    });
+    return;
+  }
+  try{
+    req.body.password = await bcrypt.hash(req.body.password, 9)
+    const client = await new ClientModel({
+      name: req.body.name,
+      surnames: req.body.surnames,
+      phone: req.body.phone,
+      email: req.body.email,
+      password: req.body.password
+    }).save();
+    res.send({
+    message: 'Account succesfully created.',
+    name: client.name,
+    surnames: client.surnames,
+    })
+  } catch (error) { 
+    if (error.code === 11000) {
+      res.status(409); 
       res.send({
-        message: 'The email is not valid.'
+        error: "Email is already being used."
       });
-      return;
+    }else {
+        res.send(error);
     }
-    try{
-      req.body.password = await bcrypt.hash(req.body.password, 9)
-      const client = await new ClientModel({
-        name: req.body.name,
-        surnames: req.body.surnames,
-        phone: req.body.phone,
-        email: req.body.email,
-        password: req.body.password
-      }).save();
-      res.send({
-      message: 'Account succesfully created.',
-      name: client.name,
-      surnames: client.surnames,
-      })
-    } catch (error) { 
-      if (error.code === 11000) {
-        res.status(409); 
-        res.send({
-          error: "Email is already being used."
-        });
-      }else {
-          res.send(error);
-      }
-    };
+  };
 };
 
 const login = async(req, res) => {
@@ -68,8 +67,8 @@ const login = async(req, res) => {
           message: 'Wrong credentials.'
       })
     }
-    }
   }
+}
 
 const logout = async(req,res) => {
   try {
