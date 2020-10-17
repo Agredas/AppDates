@@ -1,10 +1,12 @@
 // Basic Import Section
 const express = require('express');
 const app = express();
-/* const auth = require('./middleware/auth'); */
+const auth = require('./middleware/auth');
+const cors = require('./middleware/cors');
 
 //Middleware
 app.use(express.json());
+app.use(cors);
 
 // Modular Imports
 const {register} =  require('./controllers/clientController');
