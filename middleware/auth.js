@@ -1,15 +1,11 @@
-'use strict'
-
 const jwt = require('jsonwebtoken');
-const {
-  Client
-} = require('../models');
+const ClientModel = require('../models/Client');
 
 const auth = async(req,res,next) => {
   try{
     const token = req.headers.authorization.split(' ')[1];
     jwt.verify(token,'elvistecmec');
-    const client = await Client.findOne({
+    const client = await ClientModel.findOne({
       where: {token:token}
     });
     console.log(client)

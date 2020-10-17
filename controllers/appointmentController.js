@@ -32,8 +32,8 @@ const createAppointment = async(req,res) =>{
 
 
 const cancelAppointment = async(req,res) => { 
-  try {
-  const appointment = await AppointmentModel.findByIdAndDelete({ 
+  try { 
+  const appointment = await AppointmentModel.findByIdAndDelete({ _id: req.params._id
   })
     res.send({message: `Appointment succesfully deleted.`})
   }catch(error){
