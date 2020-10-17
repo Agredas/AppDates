@@ -17,7 +17,8 @@ const AppointmentSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  tokenClient:{
+  //se tienen que llamar igual, cuando creemos la cita, lo guardara con el id
+  ClientId:{
     type: String,
     required: true
   }
