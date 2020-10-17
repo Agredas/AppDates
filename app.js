@@ -37,9 +37,10 @@ app.get('/client/showId/:id', showClientId);
 app.put('/client/modify', modify);
 app.delete('/client/delete/:id', deleteClient);
 //Appointment endpoints
-app.post('/appointment/create', createAppointment);
-app.delete('/appointment/cancel', cancelAppointment);
-app.get('/appointment/show', showAppointments);
+app.post('/appointment/create',auth, createAppointment);
+// que te falta aqui? aparte del auth? había pensado en poner eso de /:id (de la cita) si a ambas lloro. ahora te falta cambiar una cosa en el controller
+app.delete('/appointment/cancel/:id', auth, cancelAppointment);
+app.get('/appointment/show', auth, showAppointments);
 
 
 // Port Listen
