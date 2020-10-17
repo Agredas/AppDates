@@ -5,9 +5,7 @@ const auth = async(req,res,next) => {
   try{
     const token = req.headers.authorization.split(' ')[1];
     jwt.verify(token,'elvistecmec');
-    const client = await ClientModel.findOne({
-      where: {token:token}
-    });
+    const client = await ClientModel.findOne({token:token});
     console.log(client)
     if(!client){
       return res.status(401).send({message: 'You are not authorized.'})
