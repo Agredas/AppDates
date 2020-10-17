@@ -1,26 +1,68 @@
 const AppointmentModel = require('../models/Appointment');
-
-const mongoose = require('mongoose');
-const { response } = require('express');
+const ClientModel = require('../models/Client');
 
 
-// Crear cita
 
-//Listado citas pendientes
-
-// Cancelar/eliminar cita
-/* const cancelledAppointment = async(req,res) => {
-  AppointmentModel.findByIdAndUpdate(req.params.id)
-  .then((cancelledAppointment) => {
-    if(cancelledAppointment){
-      res.send({message: `Appointment succesfully cancelled.`});
-    }else{
-      res.status(500);
+const createAppointment = async(req,res) =>{
+  let client = await ClientModel.findOne({
+    email: req.params.email
+  });
+  if(!client.token){
+    res.status(400).send({
+      message: 'If you want to create an appointment, you need to be loged.'
+    })
+  }else{
+    try{
+      const appointment = await AppointmentModel({
+        date: req.body.date,
+        status: req.body.status,
+        title: req.body.title,
+        description: req.body.description,
+        tokenClient: client.tokenClient
+      }).save();
       res.send({
-        message: `Appointment with that Id not found.`
+        message: `Appointment succesfully created for the date ${appointment.date}`
       })
-    };
-  }).catch((error) =>{
-    console.log('There was a problem trying to cancel the appointment.' + error)
+    }catch (error) {
+      console.log(error)
+      res.status(500).send({
+        message: 'There was a problem trying to create an appointment.' + error
+      })
+    }
+  }
+}
+
+
+const cancelAppointment = async(req,res) => { 
+  try {
+  const appointment = await AppointmentModel.findByIdAndDelete({ 
   })
-} */
+    res.send({message: `Appointment succesfully deleted.`})
+  }catch(error){
+    console.error(error);
+      res.status(500).send({
+        message: `There was a problem trying to cancel the appointment.`
+      })
+    }
+  }
+
+const getAppointments = async(req,res) =>{
+  try{
+    const appointment = await AppointmentModel.find({
+      tokenClient: req.params.tokenClient
+    })
+    res.send({appointment})
+  } catch (error){
+    console.error(error);
+    res.status(500).send({
+      message: 'There was a problem trying to show all the appointments.'
+    })
+  }
+}
+
+
+module.exports = {
+  createAppointment,
+  cancelAppointment,
+  getAppointments
+}

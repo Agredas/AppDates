@@ -2,9 +2,6 @@ const ClientModel = require('../models/Client');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const mongoose = require('mongoose');
-const { response } = require('express');
-
 const register = async (req,res) => {
   let regExEmail = /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9{2}|[0-9]{1,2})\]?$)/;
   if(!regExEmail.test(req.body.email)){

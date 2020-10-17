@@ -17,7 +17,7 @@ const AppointmentSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  token_id:{
+  tokenClient:{
     type: String,
     required: true
   }
