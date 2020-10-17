@@ -15,6 +15,12 @@ const {showClientId} =  require('./controllers/clientController');
 const {modify} =  require('./controllers/clientController');
 const {deleteClient} =  require('./controllers/clientController');
 
+const {createAppointment} =  require('./controllers/appointmentController');
+const {cancelAppointment} =  require('./controllers/appointmentController');
+const {showAppointments} =  require('./controllers/appointmentController');
+
+
+
 // DB Connection
 const dbconnect = require('./config/dbconnect');
 dbconnect();
@@ -28,6 +34,11 @@ app.get('/client/showClients', showClients);
 app.get('/client/showId/:id', showClientId);
 app.put('/client/modify', modify);
 app.delete('/client/delete/:id', deleteClient);
+//Appointment endpoints
+app.post('/appointment/create', createAppointment);
+app.delete('/appointment/cancel', cancelAppointment);
+app.get('/appointment/show', showAppointments);
+
 
 // Port Listen
 app.listen(3000, () => console.log('Server running.'))

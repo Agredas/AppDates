@@ -1,8 +1,6 @@
 const AppointmentModel = require('../models/Appointment');
 const ClientModel = require('../models/Client');
 
-
-
 const createAppointment = async(req,res) =>{
   let client = await ClientModel.findOne({
     email: req.params.email
@@ -46,7 +44,7 @@ const cancelAppointment = async(req,res) => {
     }
   }
 
-const getAppointments = async(req,res) =>{
+const showAppointments = async(req,res) =>{
   try{
     const appointment = await AppointmentModel.find({
       tokenClient: req.params.tokenClient
@@ -64,5 +62,5 @@ const getAppointments = async(req,res) =>{
 module.exports = {
   createAppointment,
   cancelAppointment,
-  getAppointments
+  showAppointments
 }
