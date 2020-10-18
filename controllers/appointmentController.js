@@ -4,6 +4,7 @@ const ClientModel = require('../models/Client');
 const createAppointment = async(req,res) =>{
     try{
       const appointment = await AppointmentModel({
+        ClientId: req.client._id,
         date: req.body.date,
         status: req.body.status,
         title: req.body.title,
@@ -18,7 +19,6 @@ const createAppointment = async(req,res) =>{
         message: 'There was a problem trying to create an appointment.' + error
       })
     }
- // }
 }
 
 
