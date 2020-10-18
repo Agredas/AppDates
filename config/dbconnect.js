@@ -1,7 +1,7 @@
 const dbconnect = () => {
    
   const mongoose = require('mongoose');
-  const MongoURI = 'mongodb+srv://Agredas:ZBhG52@cluster0.kuwyb.mongodb.net/dentalClinic?retryWrites=true&w=majority';
+  const MongoURI = process.env.MongoURI || 'mongodb+srv://Agredas:ZBhG52@cluster0.kuwyb.mongodb.net/dentalClinic?retryWrites=true&w=majority';
   
   mongoose.connect(MongoURI,{
     useNewUrlParser: true,
