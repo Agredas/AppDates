@@ -3,45 +3,21 @@ const express = require('express');
 const app = express();
 const auth = require('./middleware/auth');
 const cors = require('./middleware/cors');
+const ClientsRouter = require('./routers/clientRouter');
+const AppointmentsRouter = require('./routers/appointmentRouter');
 
 const PORT = process.env.PORT || 3000;
 //Middleware
 app.use(express.json());
 app.use(cors);
 
-// Modular Imports
-const {register} =  require('./controllers/clientController');
-const {login} = require('./controllers/clientController');
-const {logout} = require('./controllers/clientController');
-const {showClients} =  require('./controllers/clientController');
-const {showClientId} =  require('./controllers/clientController');
-const {modify} =  require('./controllers/clientController');
-const {deleteClient} =  require('./controllers/clientController');
-
-const {createAppointment} =  require('./controllers/appointmentController');
-const {cancelAppointment} =  require('./controllers/appointmentController');
-const {showAppointments} =  require('./controllers/appointmentController');
-
-
 
 // DB Connection
 const dbconnect = require('./config/dbconnect');
 dbconnect();
 
-// Endpoints 
-//Client endpoints 
-app.post('/client/register', register);
-app.post('/client/login', login);
-app.post('/client/logout', logout);
-app.get('/client/showClients', showClients);
-app.get('/client/showId/:id', showClientId);
-app.put('/client/modify', modify);
-app.delete('/client/delete/:id', deleteClient);
-//Appointment endpoints
-app.post('/appointment/create',auth, createAppointment);
-app.delete('/appointment/cancel/:id', auth, cancelAppointment);
-app.get('/appointment/show', auth, showAppointments);
-
+app.use('/client', ClientsRouter);
+app.use('/appointment', auth, AppointmentsRouter);
 
 // Port Listen
 app.listen(PORT, () => console.log('Server running on port ' + PORT + '.'))
