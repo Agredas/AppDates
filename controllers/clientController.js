@@ -44,7 +44,7 @@ const login = async(req, res) => {
     email: req.body.email
     });
     if(!clientFound) {
-      res.send({
+      res.status(400).send({
         message: 'Wrong credentials or client does not exist.'
       })
     }else{
