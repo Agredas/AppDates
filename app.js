@@ -6,7 +6,7 @@ const cors = require('./middleware/cors');
 const ClientsRouter = require('./routers/clientRouter');
 const AppointmentsRouter = require('./routers/appointmentRouter');
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 //Middleware
 app.use(express.json());
 /* app.use(cors); */
