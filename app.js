@@ -22,6 +22,8 @@ app.use(express.json());
 const dbconnect = require('./config/dbconnect');
 dbconnect();
 
+app.options('/*', (req,res)=>res.send())
+
 app.use('/client', ClientsRouter);
 app.use('/appointment', auth, AppointmentsRouter);
 
