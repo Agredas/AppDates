@@ -22,6 +22,10 @@ const ClientSchema = mongoose.Schema({
     type: String,
     required: true
   },
+  role:{
+    type: String,
+    default: 'client'
+  },
   token: {
     type: String
   }

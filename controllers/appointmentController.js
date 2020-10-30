@@ -49,9 +49,19 @@ const showAppointments = async(req,res) =>{
   }
 }
 
+const showAllAppointments = (req,res) =>{
+  AppointmentModel.find({})
+  .then(appointments =>{
+    res.send(appointments)
+  })
+  .catch(error => console.log('There was a problem trying to show all the appointments.' + error))
+    console.error(error);
+}
+
 
 module.exports = {
   createAppointment,
   cancelAppointment,
-  showAppointments
+  showAppointments,
+  showAllAppointments
 }
