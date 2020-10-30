@@ -51,7 +51,7 @@ const login = async(req, res) => {
       const isMatch = await bcrypt.compare(req.body.password, clientFound.password);
       if(isMatch){
 
-        const token = jwt.sign({id: clientFound.id }, 'elvistecmec', { expiresIn: '30d' })
+        const token = jwt.sign({id: clientFound.id, rol:clientFound.rol }, 'elvistecmec', { expiresIn: '30d' })
         clientFound.token = token;
         await clientFound.save()
 

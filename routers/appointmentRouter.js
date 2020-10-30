@@ -1,3 +1,6 @@
+const ClientModel = require('../models/Client');
+
+
 const router = require('express').Router();
 const AppointmentController = require('../controllers/appointmentController');
 const adminReq = require('../middleware/admin');

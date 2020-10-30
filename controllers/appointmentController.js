@@ -55,7 +55,6 @@ const showAllAppointments = (req,res) =>{
     res.send(appointments)
   })
   .catch(error => console.log('There was a problem trying to show all the appointments.' + error))
-    console.error(error);
 }
 
 
