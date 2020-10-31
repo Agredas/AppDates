@@ -59,7 +59,8 @@ const login = async(req, res) => {
           name: clientFound.name,
           surnames: clientFound.surnames,
           email: clientFound.email,
-          token: clientFound.token
+          token: clientFound.token,
+          rol: clientFound.rol
         })
       }else{
         return res.status(400).send({
