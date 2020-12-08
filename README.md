@@ -8,7 +8,6 @@ At the moment there is only the backend, but frontend will be added soon.
 
 - Links: 
   - Repository: [GitHub](https://github.com/Agredas/AppDentalClinic)
-  - Deployed in: [Heroku](https://app-dental-clinic-backend.herokuapp.com/client/showClients)
 
 🔧Technologies🔨
 
